@@ -1,5 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Post
+from django.http import JsonResponse
 
 def home(request):
-    return HttpResponse("Hello, this is the homepage!")
+    top_posts = Post.objects.order_by('-likes', '-publish_date')[:5]
+    
+    #Uncomment the following line to render a template when adding the frontend and comment the JsonResponse
+    # return render(request, 'home.html', {'top_posts': top_posts})
+
+    #for testing as there's no frontend yet (you have to remove it or comment it when you add the frontend)
+    data = [{"title": post.title, "likes": post.likes, "date": post.publish_date} for post in top_posts]
+    return JsonResponse(data, safe=False)
