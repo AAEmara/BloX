@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from .forms import UserForm, LoginForm
 # Create your views here.
 
@@ -12,8 +13,9 @@ def user_register (request):
         register_form = UserForm(request.POST)
         if register_form.is_valid():
             register_form.save()
+            messages.success(request, 'Registration successful! Please log in.')
             # when implement the login.html we will redirect the user to login
-            # return redirect('login')
+            # return redirect('blog_auth:login')
     else:
         register_form = UserForm()
     context = {'register_form': register_form}
@@ -29,6 +31,12 @@ def user_login (request):
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
+            # check if the user blocked or not
+            if not user.is_active:
+                messages.error(request,"Sorry, you are blocked. Contact the admin.")
+                logout(request)
+                return redirect('blog_auth:login')
+            
             login(request, user)
 
             if request.GET.get('next') is not None:
