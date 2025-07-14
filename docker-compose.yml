@@ -13,6 +13,8 @@ services:
       - db
     volumes:
       - .:/app
+      - ./media:/app/media
+    working_dir: /app
   db:
     image: postgres:16
     volumes:
