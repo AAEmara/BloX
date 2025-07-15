@@ -17,6 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'blog',
     'blog_auth',
+    'comments',
 ]
 
 MIDDLEWARE = [

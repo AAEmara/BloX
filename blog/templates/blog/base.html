@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BloX{% endblock title %}</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+        crossorigin="anonymous"
+    >
+    <style>
+        .post-image {
+            max-height: 300px;
+            width: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 576px) {
+            .post-image {
+                max-height: 180px;
+            }
+        }
+        @media (min-width: 577px) and (max-width: 992px) {
+            .post-image {
+                max-height: 250px;
+            }
+        }
+        @media (min-width: 993px) {
+            .post-image {
+                max-height: 300px;
+            }
+        }
+        .sidebar-toggle-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050; /* higher than most elements but lower than modals */
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 24px;
+            padding: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header class="bg-dark text-light">
+        {% block header %}
+            {% include 'blog/partials/navbar.html'%}
+        {% endblock header %}
+    </header>
+
+    <main class="flex-grow-1 py-4 bg-light">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        {% block footer %}
+            {% include 'blog/partials/footer.html' %}
+        {% endblock footer %}
+    </footer>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous">
+    </script>
+</body>
+</html>
