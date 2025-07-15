@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from blog.models import Post
+from django.utils import timezone
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -13,7 +14,7 @@ class Comment(models.Model):
         related_name='replies'
     )
     content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True,default=timezone.now)
 
     def is_reply(self):
         return self.parent is not None
