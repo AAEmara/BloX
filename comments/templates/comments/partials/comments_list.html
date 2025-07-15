@@ -1,0 +1,31 @@
+{% for comment in post.comments.all %}
+    {% if not comment.parent %}
+        <div class="mb-3 border rounded p-3 bg-light">
+            <strong>{{ comment.user.username }}</strong> • 
+            <small class="text-muted">{{ comment.created_at|timesince }} ago</small>
+            <p>{{ comment.content }}</p>
+
+            <!-- Replies -->
+            {% for reply in post.comments.all %}
+                {% if reply.parent == comment %}
+                    <div class="ms-4 p-2 border-start">
+                        <strong>{{ reply.user.username }}</strong> • 
+                        <small class="text-muted">{{ reply.created_at|timesince }} ago</small>
+                        <p>{{ reply.content }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {% if user.is_authenticated %}
+                <form method="post" class="ms-4 mt-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                    {{ form.content }}
+                    <button type="submit" class="btn btn-sm btn-outline-primary mt-1">Reply</button>
+                </form>
+            {% endif %}
+        </div>
+    {% endif %}
+{% empty %}
+    <p class="text-muted">No comments yet.</p>
+{% endfor %}

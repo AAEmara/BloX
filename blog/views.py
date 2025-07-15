@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from comments.forms import CommentForm
+from comments.models import Comment
 from .models import Post
 from django.http import JsonResponse
 
@@ -28,10 +29,19 @@ def post_detail(request, pk):
             comment = form.save(commit=False)
             comment.user = request.user
             comment.post = post
+            parent_id = request.POST.get('parent_id')
+            if parent_id:
+                try:
+                    parent_comment = Comment.objects.get(id=parent_id, post=post)
+                    # ✅ only allow replies to top-level comments
+                    if not parent_comment.parent:
+                        comment.parent = parent_comment
+                except Comment.DoesNotExist:
+                    pass  # Ignore bad parent_id silently
             comment.save()
             return redirect('post_detail',pk=pk)
     return render(request,'blog/post_detail.html',{
         'post':post,
         'comments':comments,
-        'comment_form':form
+        'form':form
     })
