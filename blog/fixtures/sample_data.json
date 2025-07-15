@@ -1,0 +1,199 @@
+[
+  {
+    "model": "blog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Technology"
+    }
+  },
+  {
+    "model": "blog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Health"
+    }
+  },
+  {
+    "model": "blog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Travel"
+    }
+  },
+  {
+    "model": "blog.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Python"
+    }
+  },
+  {
+    "model": "blog.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Django"
+    }
+  },
+  {
+    "model": "blog.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Fitness"
+    }
+  },
+  {
+    "model": "blog.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Adventure"
+    }
+  },
+  {
+    "model": "blog.post",
+    "pk": 1,
+    "fields": {
+      "title": "Why Django is Still Awesome in 2025",
+      "image": "post_images/django.png",
+      "content": "In this post, we explore why Django remains a top framework in 2025 for rapid web development.",
+      "category": 1,
+      "publish_date": "2025-07-01T10:00:00Z",
+      "likes": 10
+    }
+  },
+  {
+    "model": "blog.post",
+    "pk": 2,
+    "fields": {
+      "title": "Top 5 Workouts for Mental Health",
+      "image": "post_images/mental_health.png",
+      "content": "These five workouts not only boost your physical health but also improve your mental well-being.",
+      "category": 2,
+      "publish_date": "2025-06-28T14:30:00Z",
+      "likes": 7
+    }
+  },
+  {
+    "model": "blog.post",
+    "pk": 3,
+    "fields": {
+      "title": "Backpacking Through South America",
+      "image": "post_images/backpacking_south_america.jpg",
+      "content": "A guide to backpacking routes, budget travel, and hidden gems in South America.",
+      "category": 3,
+      "publish_date": "2025-07-03T08:15:00Z",
+      "likes": 12
+    }
+  },
+  {
+    "model": "blog.post",
+    "pk": 4,
+    "fields": {
+      "title": "The Rise of AI in Everyday Life",
+      "image": "post_images/ai_everyday.png",
+      "content": "From voice assistants to predictive healthcare — AI is becoming part of our daily routines.",
+      "category": 1,
+      "publish_date": "2025-07-04T11:00:00Z",
+      "likes": 15
+    }
+  },
+  {
+    "model": "blog.post",
+    "pk": 5,
+    "fields": {
+      "title": "10 Best Hikes in Europe",
+      "image": "post_images/hiking_europe.webp",
+      "content": "Discover breathtaking trails across the Alps, Pyrenees, and the Carpathians.",
+      "category": 3,
+      "publish_date": "2025-07-02T07:45:00Z",
+      "likes": 9
+    }
+  },
+  {
+    "model": "blog.post",
+    "pk": 6,
+    "fields": {
+      "title": "Healthy Smoothie Recipes for Summer",
+      "image": "post_images/smoothies.jpg",
+      "content": "Cool down with these nutritious and delicious smoothie ideas.",
+      "category": 2,
+      "publish_date": "2025-06-30T12:00:00Z",
+      "likes": 7
+    }
+  },
+  {
+    "model": "blog.post",
+    "pk": 7,
+    "fields": {
+      "title": "Learning Python as a Complete Beginner",
+      "image": "post_images/learn_python.webp",
+      "content": "Step-by-step guidance for absolute beginners who want to code with Python.",
+      "category": 1,
+      "publish_date": "2025-07-05T09:00:00Z",
+      "likes": 7
+    }
+  },
+  {
+    "model": "blog.post_tags",
+    "pk": 1,
+    "fields": {
+      "post": 1,
+      "tag": 1
+    }
+  },
+  {
+    "model": "blog.post_tags",
+    "pk": 2,
+    "fields": {
+      "post": 1,
+      "tag": 2
+    }
+  },
+  {
+    "model": "blog.post_tags",
+    "pk": 3,
+    "fields": {
+      "post": 2,
+      "tag": 3
+    }
+  },
+  {
+    "model": "blog.post_tags",
+    "pk": 4,
+    "fields": {
+      "post": 3,
+      "tag": 4
+    }
+  },
+  {
+    "model": "blog.post_tags",
+    "pk": 5,
+    "fields": {
+      "post": 4,
+      "tag": 1
+    }
+  },
+  {
+    "model": "blog.post_tags",
+    "pk": 6,
+    "fields": {
+      "post": 5,
+      "tag": 4
+    }
+  },
+  {
+    "model": "blog.post_tags",
+    "pk": 7,
+    "fields": {
+      "post": 6,
+      "tag": 3
+    }
+  },
+  {
+    "model": "blog.post_tags",
+    "pk": 8,
+    "fields": {
+      "post": 7,
+      "tag": 1
+    }
+  }
+]

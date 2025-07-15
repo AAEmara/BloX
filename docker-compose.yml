@@ -12,7 +12,8 @@ services:
     depends_on:
       - db
     volumes:
-      - .:/app  
+      - .:/app
+      - ./media:/app/media
     working_dir: /app
 
   db:
