@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+<form method="post" class="mb-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Post Comment</button>
+</form>
+{% else %}
+<p>Please <a href="{% url 'login' %}">log in</a> to comment.</p>
+{% endif %}
