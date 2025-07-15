@@ -39,7 +39,7 @@ def post_detail(request, pk):
                 except Comment.DoesNotExist:
                     pass  # Ignore bad parent_id silently
             comment.save()
-            return redirect('post_detail',pk=pk)
+            return redirect('blog:post_detail',pk=pk)
     return render(request,'blog/post_detail.html',{
         'post':post,
         'comments':comments,
