@@ -1,0 +1,23 @@
+<!-- Sidebar (desktop view) -->
+<div class="col-lg-4 d-none d-lg-block">
+    <div class="p-3 bg-white border rounded shadow-sm sticky-top" style="top: 80px;">
+        <h4 class="mb-3">Sidebar</h4>
+        <p class="text-muted">Reserved space for widgets like recent posts, categories, newsletter signup, etc.</p>
+    </div>
+</div>
+
+<!-- Sidebar Offcanvas (mobile view) -->
+<div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileSidebarLabel">Sidebar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <p class="text-muted">Reserved space for widgets like recent posts, categories, newsletter signup, etc.</p>
+    </div>
+</div>
+
+<!-- Floating Button for Mobile -->
+<button class="btn btn-secondary d-lg-none sidebar-toggle-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+    ☰
+</button>
