@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from comments.forms import CommentForm
@@ -6,15 +7,16 @@ from .models import Post
 from django.http import JsonResponse
 
 def home(request):
-    top_posts = Post.objects.order_by('-likes', '-publish_date')[:5]
-    context = {'top_posts': top_posts}
-    
-    #Uncomment the following line to render a template when adding the frontend and comment the JsonResponse
-    # return render(request, 'home.html', {'top_posts': top_posts})
+    posts = Post.objects.order_by('-likes', '-publish_date')
+    paginator = Paginator(posts, 5)  # 5 posts per page
 
-    #for testing as there's no frontend yet (you have to remove it or comment it when you add the frontend)
-    # data = [{"title": post.title, "likes": post.likes, "date": post.publish_date} for post in top_posts]
-    # return JsonResponse(data, safe=False)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+    }
+
     return render(request, "blog/base_blog.html", context)
 
 def post_detail(request, pk):
