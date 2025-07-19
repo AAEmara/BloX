@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'blog',
     'blog_auth',
     'comments',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,13 @@ AUTH_USER_MODEL = 'blog_auth.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home' 
 LOGOUT_REDIRECT_URL = 'login'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PREMISSION_CLASSES': [
+        'rest_framework.premissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}
