@@ -9,13 +9,20 @@
 
                 {% for post in page_obj %}
                 <div class="card mb-4 shadow-sm">
-                    {% if post.image %}
-                    <img src="{{ post.image.url }}" class="card-img-top img-fluid object-fit-cover post-image" alt="{{ post.title }}">
-                    {% else %}
-                    <img src="https://via.placeholder.com/800x300?text=No+Image" class="card-img-top" alt="No image">
-                    {% endif %}
+                    <a href="{% url 'blog:post_detail' post.pk %}">
+                        {% if post.image %}
+                        <img src="{{ post.image.url }}" class="card-img-top img-fluid object-fit-cover post-image" alt="{{ post.title }}">
+                        {% else %}
+                        <img src="/media/post_images/No_Image.png" class="card-img-top img-fluid object-fit-cover post-image" alt="No image">
+                        {% endif %}
+                    </a>
+
                     <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
+                        <h5 class="card-title">
+                            <a href="{% url 'blog:post_detail' post.pk %}" class="text-decoration-none text-dark">
+                                {{ post.title }}
+                            </a>
+                        </h5>
                         <p class="card-text text-muted small">
                             {{ post.publish_date|date:"M d, Y" }} — Category: {{ post.category.name }}
                         </p>
@@ -33,6 +40,7 @@
                 {% empty %}
                     <p>No posts found.</p>
                 {% endfor %}
+
 
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
