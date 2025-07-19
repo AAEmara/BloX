@@ -5,7 +5,7 @@
 
         <!-- Toggler -->
         <button
-            class="navbar-toggler"
+            class="navbar-toggler ms-auto"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarContent"
@@ -38,7 +38,7 @@
             </ul>
 
             <!-- Right: Search and buttons -->
-            <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+            <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0 flex-wrap ms-auto">
                 <form class="d-flex me-3" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                     <button class="btn btn-outline-light" type="submit">Search</button>
@@ -49,8 +49,8 @@
                         <a href="{% url 'admin:index' %}" class="btn btn-outline-warning">Manage Blog</a>
                     {% endif %}
                 {% else %}
-                    <a href="{% url 'blog_auth:login' %}" class="btn btn-warning">Login</a>
-                    <a href="{% url 'blog_auth:register' %}" class="btn btn-success">Register</a>
+                    <a href="{% url 'blog_auth:login' %}" class="btn btn-light">Login</a>
+                    <a href="{% url 'blog_auth:register' %}" class="btn btn-outline-light">Register</a>
                 {% endif %}
             </div>
         </div>
