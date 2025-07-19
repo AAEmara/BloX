@@ -1,0 +1,51 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}
+    Login | BloX
+{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'blog_auth/css/auth_form.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+    <div class="form-container">
+        <div class="form-box">
+            <h2 class="text-center mb-4">Login</h2>
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors}}
+                </div>
+                {% endif %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="mb-3">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {% for error in form.username.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                    {% for error in form.password.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-warning">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

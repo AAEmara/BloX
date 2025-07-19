@@ -10,6 +10,7 @@
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
         crossorigin="anonymous"
     >
+    {% block extra_css %}{% endblock extra_css%}
     <style>
         .post-image {
             max-height: 300px;
@@ -52,13 +53,13 @@
         {% endblock header %}
     </header>
 
-    <main class="flex-grow-1 py-4 bg-light">
+    <main class="flex-grow-1 bg-light">
         {% block content %}
         {% endblock content %}
     </main>
 
 
-    <footer class="bg-dark text-light py-4 mt-5">
+    <footer class="bg-dark text-light py-4">
         {% block footer %}
             {% include 'blog/partials/footer.html' %}
         {% endblock footer %}

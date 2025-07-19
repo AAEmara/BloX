@@ -13,7 +13,7 @@ class Comment(models.Model):
         related_name='replies'
     )
     content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def is_reply(self):
         return self.parent is not None
