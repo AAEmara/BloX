@@ -20,3 +20,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.content}"
+
+class ForbiddenWord(models.Model):
+    word = models.CharField(max_length=100,unique=True)
+
+    def __str__(self):
+        return self.word

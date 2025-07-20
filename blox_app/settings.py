@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'blog',
     'blog_auth',
     'comments',
-    'admin_panel'
+    'admin_panel',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -77,17 +78,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blox_app.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -136,6 +126,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [ BASE_DIR / 'static']
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -145,3 +137,24 @@ AUTH_USER_MODEL = 'blog_auth.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home' 
 LOGOUT_REDIRECT_URL = 'login'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PREMISSION_CLASSES': [
+        'rest_framework.premissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'      # Gmail's SMTP server
+EMAIL_PORT = 587                   # Gmail's SMTP port for TLS
+EMAIL_USE_TLS = True               # Use TLS for security
+# prefered to be in the .env
+EMAIL_HOST_USER = 'company_gmail@gmail.com' # The gmail we want to send message from
+# prefered to be in the .env
+EMAIL_HOST_PASSWORD = 'your_generated_app_password' # The 16-character App Password you generated
+DEFAULT_FROM_EMAIL = ' Company Name <company_gmail@gmail.com>' # How the 'From' field will appear
+SERVER_EMAIL = 'errors@yourcompany.com' # For Django's internal error reporting emails

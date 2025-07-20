@@ -11,6 +11,7 @@
         crossorigin="anonymous"
     >
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    {% block extra_css %}{% endblock extra_css%}
     <style>
         body {
             font-family: 'Poppins';
@@ -59,13 +60,13 @@
         {% endblock header %}
     </header>
 
-    <main class="flex-grow-1 py-4 bg-light">
+    <main class="flex-grow-1 bg-light">
         {% block content %}
         {% endblock content %}
     </main>
 
 
-    <footer class="bg-dark text-light py-4 mt-5">
+    <footer class="bg-dark text-light py-4">
         {% block footer %}
             {% include 'blog/partials/footer.html' %}
         {% endblock footer %}
