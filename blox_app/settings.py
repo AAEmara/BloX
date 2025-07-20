@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'blog',
     'blog_auth',
     'comments',
+    'admin_panel',
     'rest_framework',
 ]
 
