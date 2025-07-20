@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import Post, Category, Tag
+from .models import Post, Category, PostReaction, Tag
 
+class PostReactionInline(admin.TabularInline):
+    model = PostReaction
+    extra = 0
+    readonly_fields = ('user','is_like')
+    can_delete = True
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -8,6 +13,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     list_filter = ('category', 'publish_date')
     ordering = ('-publish_date',)
+    inlines = [PostReactionInline]
     
     def image_tag(self, obj):
         if obj.image:
