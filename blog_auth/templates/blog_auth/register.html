@@ -1,0 +1,72 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}
+    Register | BloX
+{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'blog_auth/css/auth_form.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+    <div class="form-container">
+        <div class="form-box shadow-lg">
+            <h2 class="text-center mb-4">Register</h2>
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
+                    {% for error in form.first_name.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
+                    {% for error in form.last_name.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {% for error in form.username.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                    {% for error in form.password1.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {% for error in form.password2.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
