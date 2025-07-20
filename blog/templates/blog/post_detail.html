@@ -17,7 +17,7 @@
                     <p class="text-muted small">
                         Published on {{ post.publish_date|date:"F d, Y" }} in
                         <span class="badge bg-info">{{ post.category.name }}</span>
-                        — {{ post.likes }} Likes
+                        — {{ post.like_count }} Likes
                     </p>
                     <p class="card-text">{{ post.content }}</p>
 
@@ -33,6 +33,31 @@
             </div>
         </div>
 
+        <!-- Like/Dislike Section -->
+        <div class="col-lg-8 mx-auto mt-4">
+            <div class="d-flex align-items-center gap-4">
+          
+              <!-- Like Button -->
+              <form method="post" action="{% url 'blog:react_to_post' post.pk 'like' %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link p-0 d-flex align-items-center">
+                  <i class="fa{% if user_reaction and user_reaction.is_like %}s text-success{% else %}r text-muted{% endif %} fa-thumbs-up me-1"></i>
+                  <span>{{ post.like_count }}</span>
+                </button>
+              </form>
+          
+              <!-- Dislike Button -->
+              <form method="post" action="{% url 'blog:react_to_post' post.pk 'dislike' %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link p-0 d-flex align-items-center">
+                  <i class="fa{% if user_reaction and not user_reaction.is_like %}s text-danger{% else %}r text-muted{% endif %} fa-thumbs-down me-1"></i>
+                  <span>{{ post.dislike_count }}</span>
+                </button>
+              </form>
+          
+            </div>
+        </div>
+  
         <!-- Comments Section -->
         <div class="col-lg-8 mx-auto mt-4">
             <div class="card">
