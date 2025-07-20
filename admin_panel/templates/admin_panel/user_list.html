@@ -20,7 +20,15 @@
             <td>{{ user.is_staff }}</td>
             <td>{{ user.is_active }}</td>
             <td>{{ user.is_superuser }}</td>
-        
+            <td>
+                {% if not user.is_superuser %}
+                    {% if user.is_active %}
+                        <a href="{% url 'admin_panel:block_user' user.id %}" class="btn btn-sm btn-danger">Block</a>
+                    {% else %}
+                        <a href="{% url 'admin_panel:unblock_user' user.id %}" class="btn btn-sm btn-success">Unblock</a>
+                    {% endif %}
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>
