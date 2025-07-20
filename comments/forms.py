@@ -1,7 +1,6 @@
 from django import forms
-from .models import Comment
-
-FORBIDDEN_WORDS = ['fuck','shit','damn']
+from .models import Comment, ForbiddenWord
+import re
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -15,8 +14,11 @@ class CommentForm(forms.ModelForm):
     
     def clean_content(self):
         content = self.cleaned_data.get('content','')
+        FORBIDDEN_WORDS = ForbiddenWord.objects.values_list('word',flat=True)
         for word in FORBIDDEN_WORDS:
-            content = content.replace(word,'*' * len(word))
+            content = re.sub(rf'\b{re.escape(word)}\b',
+                                   '*' * len(word),
+                                   content,flags=re.IGNORECASE)
         return content
     
     def clean(self):
