@@ -3,36 +3,28 @@
     <div class="p-3 bg-white border rounded shadow-sm sticky-top" style="top: 80px;">
         <h4 class="mb-3">Categories</h4>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-primary-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Technology
-                </a>
-            </li>
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-success-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Design
-                </a>
-            </li>
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-warning-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Business
-                </a>
-            </li>
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-danger-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Lifestyle
-                </a>
-            </li>
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-info-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Travel
-                </a>
-            </li>
+            {% for category in categories %}
+                <li class="list-group-item py-2 px-0 border-0 d-flex justify-content-between align-items-center">
+                    <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2 flex-grow-1">
+                        {# You can dynamically assign colors or use a default one #}
+                        <span class="bg-primary-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
+                        {{ category.name }}
+                    </a>
+                    {% if request.user.is_authenticated %}
+                        {# Check if the current user is subscribed to this category #}
+                        {% if category in request.user.subscribed_categories.all %}
+                            <a href="{% url 'unsubscribe_category' category.id %}" class="btn btn-sm btn-danger ms-2">Unsubscribe</a>
+                        {% else %}
+                            <a href="{% url 'subscribe_category' category.id %}" class="btn btn-sm btn-success ms-2">Subscribe</a>
+                        {% endif %}
+                    {% else %}
+                        {# Optionally, show a disabled button or a message if not logged in #}
+                        <span class="text-muted ms-2" style="font-size: 0.85em;">(Login to subscribe)</span>
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="list-group-item py-2 px-0 border-0 text-muted">No categories available.</li>
+            {% endfor %}
         </ul>
     </div>
 </div>
@@ -50,36 +42,28 @@
     </div>
     <div class="offcanvas-body">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-primary-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Technology
-                </a>
-            </li>
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-success-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Design
-                </a>
-            </li>
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-warning-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Business
-                </a>
-            </li>
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-danger-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Lifestyle
-                </a>
-            </li>
-            <li class="list-group-item py-2 px-0 border-0">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2">
-                    <span class="bg-info-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
-                    Travel
-                </a>
-            </li>
+            {% for category in categories %}
+                <li class="list-group-item py-2 px-0 border-0 d-flex justify-content-between align-items-center">
+                    <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark fw-semibold hover-bg-light rounded px-2 py-2 flex-grow-1">
+                        {# You can dynamically assign colors or use a default one #}
+                        <span class="bg-primary-subtle rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
+                        {{ category.name }}
+                    </a>
+                    {% if request.user.is_authenticated %}
+                        {# Check if the current user is subscribed to this category #}
+                        {% if category in request.user.subscribed_categories.all %}
+                            <a href="{% url 'unsubscribe_category' category.id %}" class="btn btn-sm btn-danger ms-2">Unsubscribe</a>
+                        {% else %}
+                            <a href="{% url 'subscribe_category' category.id %}" class="btn btn-sm btn-success ms-2">Subscribe</a>
+                        {% endif %}
+                    {% else %}
+                        {# Optionally, show a disabled button or a message if not logged in #}
+                        <span class="text-muted ms-2" style="font-size: 0.85em;">(Login to subscribe)</span>
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="list-group-item py-2 px-0 border-0 text-muted">No categories available.</li>
+            {% endfor %}
         </ul>
     </div>
 </div>
