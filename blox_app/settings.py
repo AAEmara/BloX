@@ -135,3 +135,14 @@ AUTH_USER_MODEL = 'blog_auth.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home' 
 LOGOUT_REDIRECT_URL = 'login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'      # Gmail's SMTP server
+EMAIL_PORT = 587                   # Gmail's SMTP port for TLS
+EMAIL_USE_TLS = True               # Use TLS for security
+# prefered to be in the .env
+EMAIL_HOST_USER = 'company_gmail@gmail.com' # The gmail we want to send message from
+# prefered to be in the .env
+EMAIL_HOST_PASSWORD = 'your_generated_app_password' # The 16-character App Password you generated
+DEFAULT_FROM_EMAIL = ' Company Name <company_gmail@gmail.com>' # How the 'From' field will appear
+SERVER_EMAIL = 'errors@yourcompany.com' # For Django's internal error reporting emails
