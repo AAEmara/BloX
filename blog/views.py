@@ -2,11 +2,11 @@
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required # Import for subscription views
+from django.contrib.auth.decorators import login_required
 from comments.forms import CommentForm
 from comments.models import Comment
-from .models import Post, Category # Ensure Category is imported
-from django.http import JsonResponse # Keep if you use it elsewhere
+from .models import Post, Category
+from django.http import JsonResponse
 
 def home(request):
     """
@@ -78,7 +78,11 @@ def subscribe_category(request, category_id):
         # TODO: Implement bonus: Send confirmation email here
         # send_subscription_confirmation_email(request.user, category)
         print(f"User {request.user.username} subscribed to {category.name}") # For debugging
-    return redirect(request.META.get('HTTP_REFERER', reverse('home')))
+
+    # Redirect back to the page where the action was initiated,
+    # or a default page like the home page.
+    # Corrected: Use 'blog:home' for namespaced URL reversal
+    return redirect(request.META.get('HTTP_REFERER', reverse('blog:home')))
 
 
 @login_required
@@ -93,5 +97,7 @@ def unsubscribe_category(request, category_id):
         request.user.subscribed_categories.remove(category)
         print(f"User {request.user.username} unsubscribed from {category.name}") # For debugging
 
-    return redirect(request.META.get('HTTP_REFERER', reverse('home')))
-
+    # Redirect back to the page where the action was initiated,
+    # or a default page like the home page.
+    # Corrected: Use 'blog:home' for namespaced URL reversal
+    return redirect(request.META.get('HTTP_REFERER', reverse('blog:home')))

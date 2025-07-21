@@ -13,13 +13,13 @@
                     {% if request.user.is_authenticated %}
                         {# Check if the current user is subscribed to this category #}
                         {% if category in request.user.subscribed_categories.all %}
-                            <a href="{% url 'unsubscribe_category' category.id %}" class="btn btn-sm btn-danger ms-2">Unsubscribe</a>
+                            <a href="{% url 'blog:unsubscribe_category' category.id %}" class="btn btn-sm btn-danger ms-2">Unsubscribe</a>
                         {% else %}
-                            <a href="{% url 'subscribe_category' category.id %}" class="btn btn-sm btn-success ms-2">Subscribe</a>
+                            <a href="{% url 'blog:subscribe_category' category.id %}" class="btn btn-sm btn-success ms-2">Subscribe</a>
                         {% endif %}
                     {% else %}
-                        {# Optionally, show a disabled button or a message if not logged in #}
-                        <span class="text-muted ms-2" style="font-size: 0.85em;">(Login to subscribe)</span>
+                        {# Changed from <span> to <a> button for logged-out users #}
+                        <a href="{% url 'blog:subscribe_category' category.id %}" class="btn btn-sm btn-success ms-2">Subscribe</a>
                     {% endif %}
                 </li>
             {% empty %}
@@ -52,13 +52,13 @@
                     {% if request.user.is_authenticated %}
                         {# Check if the current user is subscribed to this category #}
                         {% if category in request.user.subscribed_categories.all %}
-                            <a href="{% url 'unsubscribe_category' category.id %}" class="btn btn-sm btn-danger ms-2">Unsubscribe</a>
+                            <a href="{% url 'blog:unsubscribe_category' category.id %}" class="btn btn-sm btn-danger ms-2">Unsubscribe</a>
                         {% else %}
-                            <a href="{% url 'subscribe_category' category.id %}" class="btn btn-sm btn-success ms-2">Subscribe</a>
+                            <a href="{% url 'blog:subscribe_category' category.id %}" class="btn btn-sm btn-success ms-2">Subscribe</a>
                         {% endif %}
                     {% else %}
-                        {# Optionally, show a disabled button or a message if not logged in #}
-                        <span class="text-muted ms-2" style="font-size: 0.85em;">(Login to subscribe)</span>
+                        {# Changed from <span> to <a> button for logged-out users #}
+                        <a href="{% url 'blog:subscribe_category' category.id %}" class="btn btn-sm btn-success ms-2">Subscribe</a>
                     {% endif %}
                 </li>
             {% empty %}
